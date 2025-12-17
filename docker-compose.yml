@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # 1. The Database (PostgreSQL) - Stores User Data & Chat History
+  db:
+    image: postgres:15-alpine
+    container_name: codeops_db
+    restart: always
+    environment:
+      POSTGRES_USER: ultra_admin
+      POSTGRES_PASSWORD: ultra_secure_password
+      POSTGRES_DB: codeops_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # 2. The Cache/Queue (Redis) - Handles AI Task Queues
+  redis:
+    image: redis:alpine
+    container_name: codeops_redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # 3. The Backend (FastAPI)
+  backend:
+    build: ./backend
+    container_name: codeops_backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./backend:/app
+      - /var/run/docker.sock:/var/run/docker.sock # Allows Agent to spin up sibling containers
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://ultra_admin:ultra_secure_password@db:5432/codeops_db
+      - REDIS_URL=redis://redis:6379/0
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  postgres_data:
