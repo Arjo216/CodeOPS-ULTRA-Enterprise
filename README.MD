@@ -55,9 +55,6 @@ cd codeops-ultra
 Configure Environment
 Create a .env file in the root directory:
 
-GOOGLE_API_KEY=AIzaSy... 
-DATABASE_URL=postgresql+asyncpg://ultra_admin:ultra_secure_password@db:5432/codeops_db
-
 
 Launch System (Docker Compose)
 This single command builds the backend, sets up the database, and starts the frontend.
