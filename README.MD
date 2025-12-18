@@ -48,14 +48,14 @@ Installation
 
 Clone the Repository
 
-git clone [https://github.com/yourusername/codeops-ultra.git](https://github.com/yourusername/codeops-ultra.git)
+git clone [https://github.com/Arjo216/CodeOPS-ULTRA-Enterprise.git](https://github.com/yourusername/codeops-ultra.git)
 cd codeops-ultra
 
 
 Configure Environment
 Create a .env file in the root directory:
 
-GOOGLE_API_KEY=AIzaSy... (Your Key Here)
+GOOGLE_API_KEY=AIzaSy... 
 DATABASE_URL=postgresql+asyncpg://ultra_admin:ultra_secure_password@db:5432/codeops_db
 
 
