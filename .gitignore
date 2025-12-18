@@ -1,0 +1,14 @@
+#Environments
+.env .venv/ venv/ env/
+
+#Python
+pycache/ *.py[cod] *$py.class
+
+#Node / Frontend
+node_modules/ .next/ build/ dist/ .DS_Store
+
+#Docker
+.docker/
+
+#IDEs
+.vscode/ .idea/
